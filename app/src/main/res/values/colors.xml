@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <color name="bg_dark">#0F111A</color>
+    <color name="card_bg">#181B2B</color>
+    <color name="primary">#7B2CBF</color> <!-- Purple -->
+    <color name="secondary">#00E5FF</color> <!-- Neon Cyan -->
+    <color name="accent_green">#00E676</color> <!-- Active Green -->
+    <color name="accent_red">#FF1744</color> <!-- Inactive/Error Red -->
+    <color name="accent_amber">#FFC107</color> <!-- Warning Amber -->
+    <color name="text_main">#FFFFFF</color>
+    <color name="text_sub">#A0A5C0</color>
+    <color name="divider">#2C2F48</color>
+</resources>
