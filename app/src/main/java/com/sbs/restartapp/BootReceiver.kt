@@ -16,14 +16,8 @@ class BootReceiver : BroadcastReceiver() {
             "android.intent.action.QUICKBOOT_POWERON" == action ||
             "com.htc.intent.action.QUICKBOOT_POWERON" == action) {
             
-            val prefs = context.getSharedPreferences("reboot_prefs", Context.MODE_PRIVATE)
-            val enabled = prefs.getBoolean("enabled", false)
-            if (enabled) {
-                val hour = prefs.getInt("hour", 3)
-                val minute = prefs.getInt("minute", 0)
-                Log.d(TAG, "Rescheduling reboot at $hour:$minute after boot")
-                RebootScheduler.scheduleReboot(context, hour, minute)
-            }
+            Log.d(TAG, "Rescheduling weekly reboot after boot completion")
+            RebootScheduler.scheduleReboot(context)
         }
     }
 }

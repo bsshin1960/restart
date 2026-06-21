@@ -19,20 +19,68 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/main_title"
             android:textColor="@color/text_main"
             android:textSize="26sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="center_horizontal" />
 
-        <TextView
-            android:id="@+id/tvHeaderSubtitle"
+        <!-- Mode Selection Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="24dp"
-            android:text="@string/main_subtitle"
-            android:textColor="@color/text_sub"
-            android:textSize="14sp" />
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/divider"
+            app:cardBackgroundColor="@color/card_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mode_title"
+                    android:textColor="@color/text_main"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp"/>
+
+                <RadioGroup
+                    android:id="@+id/rgMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbAccessibility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="@string/mode_accessibility"
+                        android:textColor="@color/text_main"
+                        android:textSize="14sp"
+                        app:useMaterialThemeColors="true"
+                        android:checked="true"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbAdb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mode_adb"
+                        android:textColor="@color/text_main"
+                        android:textSize="14sp"
+                        app:useMaterialThemeColors="true"/>
+                </RadioGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Status Card -->
         <com.google.android.material.card.MaterialCardView
@@ -60,9 +108,9 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="16dp"/>
 
-                <!-- Accessibility Status Item -->
+                <!-- Status Item Row -->
                 <LinearLayout
-                    android:id="@+id/layoutAccessibilityStatus"
+                    android:id="@+id/layoutStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -70,17 +118,17 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="4dp"
-                    android:layout_marginBottom="12dp">
+                    android:padding="4dp">
 
                     <View
-                        android:id="@+id/indicatorAccessibility"
+                        android:id="@+id/indicatorStatus"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
                         android:background="@drawable/status_indicator_red"
                         android:layout_marginEnd="10dp"/>
 
                     <TextView
+                        android:id="@+id/tvStatusLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/accessibility_status_label"
@@ -89,7 +137,7 @@
                         android:layout_marginEnd="6dp"/>
 
                     <TextView
-                        android:id="@+id/tvAccessibilityStatus"
+                        android:id="@+id/tvStatusValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -98,50 +146,10 @@
                         android:textSize="14sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    android:layout_marginBottom="12dp"/>
-
-                <!-- Device Owner Status Item -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="4dp">
-
-                    <View
-                        android:id="@+id/indicatorDPM"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:background="@drawable/status_indicator_red"
-                        android:layout_marginEnd="10dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/dpm_status_label"
-                        android:textColor="@color/text_sub"
-                        android:textSize="14sp"
-                        android:layout_marginEnd="6dp"/>
-
-                    <TextView
-                        android:id="@+id/tvDpmStatus"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/dpm_inactive"
-                        android:textColor="@color/accent_red"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Immediate Reboot Card -->
+        <!-- Action Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,9 +175,9 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="16dp"/>
 
-                <!-- Accessibility Reboot Button -->
+                <!-- Single Reboot Button -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnRebootAccessibility"
+                    android:id="@+id/btnReboot"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:text="@string/btn_reboot_accessibility"
@@ -177,28 +185,15 @@
                     app:backgroundTint="@color/primary"
                     app:cornerRadius="12dp"
                     android:textAllCaps="false"
-                    android:layout_marginBottom="12dp"
                     app:rippleColor="#80FFFFFF"/>
-
-                <!-- DPM Reboot Button -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnRebootDpm"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/btn_reboot_dpm"
-                    android:textColor="@color/bg_dark"
-                    app:backgroundTint="@color/secondary"
-                    app:cornerRadius="12dp"
-                    android:textAllCaps="false"
-                    app:rippleColor="#80000000"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Scheduled Reboot Card -->
+        <!-- Restart Reservation Card (재시작 예약) -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
@@ -242,6 +237,143 @@
                         app:useMaterialThemeColors="true" />
                 </LinearLayout>
 
+                <!-- Day of Week Selector Row -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="예약 요일 선택"
+                    android:textColor="@color/text_sub"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <LinearLayout
+                    android:id="@+id/layoutDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDaySun"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:text="일"
+                        android:textSize="12sp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:layout_margin="2dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/divider"
+                        android:textColor="@color/text_sub"
+                        app:cornerRadius="20dp"
+                        android:checkable="true"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDayMon"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:text="월"
+                        android:textSize="12sp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:layout_margin="2dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/divider"
+                        android:textColor="@color/text_sub"
+                        app:cornerRadius="20dp"
+                        android:checkable="true"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDayTue"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:text="화"
+                        android:textSize="12sp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:layout_margin="2dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/divider"
+                        android:textColor="@color/text_sub"
+                        app:cornerRadius="20dp"
+                        android:checkable="true"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDayWed"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:text="수"
+                        android:textSize="12sp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:layout_margin="2dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/divider"
+                        android:textColor="@color/text_sub"
+                        app:cornerRadius="20dp"
+                        android:checkable="true"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDayThu"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:text="목"
+                        android:textSize="12sp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:layout_margin="2dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/divider"
+                        android:textColor="@color/text_sub"
+                        app:cornerRadius="20dp"
+                        android:checkable="true"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDayFri"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:text="금"
+                        android:textSize="12sp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:layout_margin="2dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/divider"
+                        android:textColor="@color/text_sub"
+                        app:cornerRadius="20dp"
+                        android:checkable="true"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDaySat"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="0dp"
+                        android:text="토"
+                        android:textSize="12sp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:layout_margin="2dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/divider"
+                        android:textColor="@color/text_sub"
+                        app:cornerRadius="20dp"
+                        android:checkable="true"/>
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/layoutTimePicker"
                     android:layout_width="match_parent"
@@ -281,73 +413,6 @@
                     android:textSize="13sp"
                     android:gravity="center_horizontal"
                     android:layout_marginTop="4dp"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- ADB Guide Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/divider"
-            app:cardBackgroundColor="@color/card_bg">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/setup_title"
-                    android:textColor="@color/text_main"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/setup_guide"
-                    android:textColor="@color/text_sub"
-                    android:textSize="13sp"
-                    android:lineSpacingMultiplier="1.2"
-                    android:layout_marginBottom="16dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="#2000E5FF"
-                    android:padding="12dp"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:id="@+id/tvAdbCommand"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/setup_cmd"
-                        android:textColor="@color/secondary"
-                        android:textSize="12sp"
-                        android:fontFamily="monospace"/>
-                </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCopyCmd"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/btn_copy_cmd"
-                    android:textColor="@color/secondary"
-                    app:strokeColor="@color/secondary"
-                    app:cornerRadius="10dp"
-                    android:textAllCaps="false"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
