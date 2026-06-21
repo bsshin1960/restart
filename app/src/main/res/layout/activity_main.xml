@@ -11,18 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"> <!-- Maximized card width by reducing padding -->
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <!-- Header Section -->
         <TextView
             android:id="@+id/tvHeaderTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/main_title"
             android:textColor="@color/text_main"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:gravity="center_horizontal" />
 
@@ -30,8 +33,8 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginBottom="6dp"
+            app:cardCornerRadius="14dp"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/divider"
@@ -43,17 +46,17 @@
                 android:orientation="vertical"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mode_title"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginBottom="4dp"/>
 
                 <RadioGroup
                     android:id="@+id/rgMode"
@@ -66,10 +69,10 @@
                         android:id="@+id/rbAccessibility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="20dp"
                         android:text="@string/mode_accessibility"
                         android:textColor="@color/text_main"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         app:useMaterialThemeColors="true"
                         android:checked="true"/>
 
@@ -79,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/mode_adb"
                         android:textColor="@color/text_main"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         app:useMaterialThemeColors="true"/>
                 </RadioGroup>
             </LinearLayout>
@@ -89,8 +92,8 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginBottom="6dp"
+            app:cardCornerRadius="14dp"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/divider"
@@ -102,17 +105,17 @@
                 android:orientation="vertical"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/status_title"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="6dp"/>
 
                 <!-- Accessibility Status Row -->
                 <LinearLayout
@@ -124,8 +127,8 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="4dp"
-                    android:layout_marginBottom="4dp">
+                    android:padding="3dp"
+                    android:layout_marginBottom="2dp">
 
                     <View
                         android:id="@+id/indicatorAccessibility"
@@ -139,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/accessibility_status_label"
                         android:textColor="@color/text_sub"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         android:layout_marginEnd="6dp"/>
 
                     <TextView
@@ -149,7 +152,7 @@
                         android:layout_weight="1"
                         android:text="@string/accessibility_denied"
                         android:textColor="@color/accent_red"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
 
@@ -163,8 +166,8 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="4dp"
-                    android:layout_marginBottom="12dp">
+                    android:padding="3dp"
+                    android:layout_marginBottom="8dp">
 
                     <View
                         android:id="@+id/indicatorAdb"
@@ -178,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/dpm_status_label"
                         android:textColor="@color/text_sub"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         android:layout_marginEnd="6dp"/>
 
                     <TextView
@@ -188,7 +191,7 @@
                         android:layout_weight="1"
                         android:text="@string/dpm_inactive"
                         android:textColor="@color/accent_red"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
 
@@ -196,32 +199,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/divider"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="8dp"/>
 
                 <!-- Accessibility Action Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRebootAccessibility"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="44dp"
                     android:text="@string/btn_reboot_accessibility_need"
                     android:textColor="@color/white"
-                    app:backgroundTint="@color/accent_red"
-                    app:cornerRadius="10dp"
-                    android:textSize="14sp"
+                    app:backgroundTint="@color/primary"
+                    app:cornerRadius="8dp"
+                    android:textSize="13sp"
                     android:textAllCaps="false"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="6dp"
                     app:rippleColor="#80FFFFFF"/>
 
                 <!-- ADB Action Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRebootDpm"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="44dp"
                     android:text="@string/btn_reboot_dpm_need"
                     android:textColor="@color/white"
-                    app:backgroundTint="@color/accent_red"
-                    app:cornerRadius="10dp"
-                    android:textSize="14sp"
+                    app:backgroundTint="@color/primary"
+                    app:cornerRadius="8dp"
+                    android:textSize="13sp"
                     android:textAllCaps="false"
                     app:rippleColor="#80FFFFFF"/>
             </LinearLayout>
@@ -231,8 +234,8 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="14dp"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/divider"
@@ -244,24 +247,24 @@
                 android:orientation="vertical"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/schedule_title"
                     android:textColor="@color/text_main"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="6dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="6dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -269,7 +272,7 @@
                         android:layout_weight="1"
                         android:text="@string/schedule_switch_label"
                         android:textColor="@color/text_main"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/switchSchedule"
@@ -284,135 +287,134 @@
                     android:layout_height="wrap_content"
                     android:text="예약 요일 선택"
                     android:textColor="@color/text_sub"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="6dp"/>
+                    android:textSize="11sp"
+                    android:layout_marginBottom="4dp"/>
 
-                <!-- Reduced button size to 36dp and margins to 1.5dp to prevent wrapping -->
+                <!-- Configured 15dp gap between buttons, size reduced to 30dp to guarantee it fits on all screens -->
                 <LinearLayout
                     android:id="@+id/layoutDays"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="8dp">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnDaySun"
                         style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:padding="0dp"
                         android:text="일"
-                        android:textSize="11sp"
+                        android:textSize="10sp"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:layout_margin="1.5dp"
+                        android:layout_marginEnd="15dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/divider"
                         android:textColor="@color/text_sub"
-                        app:cornerRadius="18dp"
+                        app:cornerRadius="15dp"
                         android:checkable="true"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnDayMon"
                         style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:padding="0dp"
                         android:text="월"
-                        android:textSize="11sp"
+                        android:textSize="10sp"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:layout_margin="1.5dp"
+                        android:layout_marginEnd="15dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/divider"
                         android:textColor="@color/text_sub"
-                        app:cornerRadius="18dp"
+                        app:cornerRadius="15dp"
                         android:checkable="true"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnDayTue"
                         style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:padding="0dp"
                         android:text="화"
-                        android:textSize="11sp"
+                        android:textSize="10sp"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:layout_margin="1.5dp"
+                        android:layout_marginEnd="15dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/divider"
                         android:textColor="@color/text_sub"
-                        app:cornerRadius="18dp"
+                        app:cornerRadius="15dp"
                         android:checkable="true"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnDayWed"
                         style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:padding="0dp"
                         android:text="수"
-                        android:textSize="11sp"
+                        android:textSize="10sp"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:layout_margin="1.5dp"
+                        android:layout_marginEnd="15dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/divider"
                         android:textColor="@color/text_sub"
-                        app:cornerRadius="18dp"
+                        app:cornerRadius="15dp"
                         android:checkable="true"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnDayThu"
                         style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:padding="0dp"
                         android:text="목"
-                        android:textSize="11sp"
+                        android:textSize="10sp"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:layout_margin="1.5dp"
+                        android:layout_marginEnd="15dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/divider"
                         android:textColor="@color/text_sub"
-                        app:cornerRadius="18dp"
+                        app:cornerRadius="15dp"
                         android:checkable="true"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnDayFri"
                         style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:padding="0dp"
                         android:text="금"
-                        android:textSize="11sp"
+                        android:textSize="10sp"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:layout_margin="1.5dp"
+                        android:layout_marginEnd="15dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/divider"
                         android:textColor="@color/text_sub"
-                        app:cornerRadius="18dp"
+                        app:cornerRadius="15dp"
                         android:checkable="true"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnDaySat"
                         style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:padding="0dp"
                         android:text="토"
-                        android:textSize="11sp"
+                        android:textSize="10sp"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:layout_margin="1.5dp"
                         app:strokeWidth="1dp"
                         app:strokeColor="@color/divider"
                         android:textColor="@color/text_sub"
-                        app:cornerRadius="18dp"
+                        app:cornerRadius="15dp"
                         android:checkable="true"/>
                 </LinearLayout>
 
@@ -422,7 +424,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="6dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -430,7 +432,7 @@
                         android:layout_weight="1"
                         android:text="@string/schedule_time_label"
                         android:textColor="@color/text_sub"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tvSelectedTime"
@@ -438,12 +440,12 @@
                         android:layout_height="wrap_content"
                         android:text="03:00"
                         android:textColor="@color/secondary"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:padding="4dp"/>
+                        android:padding="3dp"/>
                 </LinearLayout>
 
                 <TextView
@@ -452,7 +454,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/schedule_info_disabled"
                     android:textColor="@color/text_sub"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:gravity="center_horizontal"
                     android:layout_marginTop="2dp"/>
             </LinearLayout>

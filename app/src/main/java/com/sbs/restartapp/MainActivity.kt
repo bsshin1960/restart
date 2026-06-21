@@ -68,15 +68,15 @@ class MainActivity : AppCompatActivity() {
             binding.tvAccessibilityStatus.setTextColor(getColor(R.color.accent_green))
 
             binding.btnRebootAccessibility.text = getString(R.string.btn_reboot_accessibility)
-            binding.btnRebootAccessibility.setBackgroundColor(getColor(R.color.primary))
-            binding.btnRebootAccessibility.setTextColor(getColor(R.color.white))
+            binding.btnRebootAccessibility.setBackgroundColor(getColor(R.color.accent_green))
+            binding.btnRebootAccessibility.setTextColor(getColor(R.color.bg_dark))
         } else {
             binding.indicatorAccessibility.setBackgroundResource(R.drawable.status_indicator_red)
             binding.tvAccessibilityStatus.text = getString(R.string.accessibility_denied)
             binding.tvAccessibilityStatus.setTextColor(getColor(R.color.accent_red))
 
             binding.btnRebootAccessibility.text = getString(R.string.btn_reboot_accessibility_need)
-            binding.btnRebootAccessibility.setBackgroundColor(getColor(R.color.accent_red))
+            binding.btnRebootAccessibility.setBackgroundColor(getColor(R.color.primary))
             binding.btnRebootAccessibility.setTextColor(getColor(R.color.white))
         }
 
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             binding.tvAdbStatus.setTextColor(getColor(R.color.accent_green))
 
             binding.btnRebootDpm.text = getString(R.string.btn_reboot_dpm)
-            binding.btnRebootDpm.setBackgroundColor(getColor(R.color.secondary))
+            binding.btnRebootDpm.setBackgroundColor(getColor(R.color.accent_green))
             binding.btnRebootDpm.setTextColor(getColor(R.color.bg_dark))
         } else {
             binding.indicatorAdb.setBackgroundResource(R.drawable.status_indicator_red)
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
             binding.tvAdbStatus.setTextColor(getColor(R.color.accent_red))
 
             binding.btnRebootDpm.text = getString(R.string.btn_reboot_dpm_need)
-            binding.btnRebootDpm.setBackgroundColor(getColor(R.color.accent_red))
+            binding.btnRebootDpm.setBackgroundColor(getColor(R.color.primary))
             binding.btnRebootDpm.setTextColor(getColor(R.color.white))
         }
     }
