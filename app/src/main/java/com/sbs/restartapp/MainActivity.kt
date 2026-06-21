@@ -40,8 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val mode = prefs.getString("selected_mode", "accessibility") ?: "accessibility"
-        updateModeUI(mode)
+        setupStatusCheck()
     }
 
     private fun setupModeSelection() {
@@ -55,121 +54,106 @@ class MainActivity : AppCompatActivity() {
         binding.rgMode.setOnCheckedChangeListener { _, checkedId ->
             val mode = if (checkedId == R.id.rbAdb) "adb" else "accessibility"
             prefs.edit().putString("selected_mode", mode).apply()
-            updateModeUI(mode)
         }
     }
 
     private fun setupStatusCheck() {
-        val mode = prefs.getString("selected_mode", "accessibility") ?: "accessibility"
-        updateModeUI(mode)
-    }
-
-    private fun updateModeUI(mode: String) {
-        val isOwner = isDeviceOwner()
         val isAccessibilityEnabled = isAccessibilityServiceEnabled()
+        val isOwner = isDeviceOwner()
 
-        // Update Day Buttons Styles based on mode color scheme
-        val dayButtons = mapOf(
-            "1" to binding.btnDaySun,
-            "2" to binding.btnDayMon,
-            "3" to binding.btnDayTue,
-            "4" to binding.btnDayWed,
-            "5" to binding.btnDayThu,
-            "6" to binding.btnDayFri,
-            "7" to binding.btnDaySat
-        )
-        val selectedDays = prefs.getStringSet("selected_days", setOf("1", "2", "3", "4", "5", "6", "7")) ?: emptySet()
-        for ((dayStr, btn) in dayButtons) {
-            updateDayButtonStyle(btn, selectedDays.contains(dayStr))
+        // 1. Update Accessibility Status & Button
+        if (isAccessibilityEnabled) {
+            binding.indicatorAccessibility.setBackgroundResource(R.drawable.status_indicator_green)
+            binding.tvAccessibilityStatus.text = getString(R.string.accessibility_granted)
+            binding.tvAccessibilityStatus.setTextColor(getColor(R.color.accent_green))
+
+            binding.btnRebootAccessibility.text = getString(R.string.btn_reboot_accessibility)
+            binding.btnRebootAccessibility.setBackgroundColor(getColor(R.color.primary))
+            binding.btnRebootAccessibility.setTextColor(getColor(R.color.white))
+        } else {
+            binding.indicatorAccessibility.setBackgroundResource(R.drawable.status_indicator_red)
+            binding.tvAccessibilityStatus.text = getString(R.string.accessibility_denied)
+            binding.tvAccessibilityStatus.setTextColor(getColor(R.color.accent_red))
+
+            binding.btnRebootAccessibility.text = getString(R.string.btn_reboot_accessibility_need)
+            binding.btnRebootAccessibility.setBackgroundColor(getColor(R.color.accent_red))
+            binding.btnRebootAccessibility.setTextColor(getColor(R.color.white))
         }
 
-        if (mode == "adb") {
-            // ADB Mode UI
-            binding.tvStatusLabel.text = getString(R.string.dpm_status_label)
-            if (isOwner) {
-                binding.indicatorStatus.setBackgroundResource(R.drawable.status_indicator_green)
-                binding.tvStatusValue.text = getString(R.string.dpm_active)
-                binding.tvStatusValue.setTextColor(getColor(R.color.accent_green))
-            } else {
-                binding.indicatorStatus.setBackgroundResource(R.drawable.status_indicator_red)
-                binding.tvStatusValue.text = getString(R.string.dpm_inactive)
-                binding.tvStatusValue.setTextColor(getColor(R.color.accent_red))
-            }
+        // 2. Update ADB Status & Button
+        if (isOwner) {
+            binding.indicatorAdb.setBackgroundResource(R.drawable.status_indicator_green)
+            binding.tvAdbStatus.text = getString(R.string.dpm_active)
+            binding.tvAdbStatus.setTextColor(getColor(R.color.accent_green))
 
-            binding.btnReboot.text = getString(R.string.btn_reboot_dpm)
-            binding.btnReboot.setBackgroundColor(getColor(R.color.secondary))
-            binding.btnReboot.setTextColor(getColor(R.color.bg_dark))
-            binding.btnReboot.rippleColor = ColorStateList.valueOf(0x80000000.toInt())
+            binding.btnRebootDpm.text = getString(R.string.btn_reboot_dpm)
+            binding.btnRebootDpm.setBackgroundColor(getColor(R.color.secondary))
+            binding.btnRebootDpm.setTextColor(getColor(R.color.bg_dark))
         } else {
-            // Accessibility Mode UI
-            binding.tvStatusLabel.text = getString(R.string.accessibility_status_label)
-            if (isAccessibilityEnabled) {
-                binding.indicatorStatus.setBackgroundResource(R.drawable.status_indicator_green)
-                binding.tvStatusValue.text = getString(R.string.accessibility_granted)
-                binding.tvStatusValue.setTextColor(getColor(R.color.accent_green))
-            } else {
-                binding.indicatorStatus.setBackgroundResource(R.drawable.status_indicator_red)
-                binding.tvStatusValue.text = getString(R.string.accessibility_denied)
-                binding.tvStatusValue.setTextColor(getColor(R.color.accent_red))
-            }
+            binding.indicatorAdb.setBackgroundResource(R.drawable.status_indicator_red)
+            binding.tvAdbStatus.text = getString(R.string.dpm_inactive)
+            binding.tvAdbStatus.setTextColor(getColor(R.color.accent_red))
 
-            binding.btnReboot.text = getString(R.string.btn_reboot_accessibility)
-            binding.btnReboot.setBackgroundColor(getColor(R.color.primary))
-            binding.btnReboot.setTextColor(getColor(R.color.white))
-            binding.btnReboot.rippleColor = ColorStateList.valueOf(0x80FFFFFF.toInt())
+            binding.btnRebootDpm.text = getString(R.string.btn_reboot_dpm_need)
+            binding.btnRebootDpm.setBackgroundColor(getColor(R.color.accent_red))
+            binding.btnRebootDpm.setTextColor(getColor(R.color.white))
         }
     }
 
     private fun setupRebootActions() {
-        binding.layoutStatus.setOnClickListener {
-            val mode = prefs.getString("selected_mode", "accessibility") ?: "accessibility"
-            if (mode == "accessibility") {
-                openAccessibilitySettings()
-            } else {
-                Toast.makeText(this, "ADB 방식은 PC 연결 및 권한 설정 가이드가 적용되어야 활성화됩니다.", Toast.LENGTH_LONG).show()
-            }
+        binding.layoutAccessibilityStatus.setOnClickListener {
+            openAccessibilitySettings()
         }
 
-        binding.btnReboot.setOnClickListener {
-            val mode = prefs.getString("selected_mode", "accessibility") ?: "accessibility"
-            if (mode == "adb") {
-                if (isDeviceOwner()) {
-                    val dpm = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-                    val adminComponent = ComponentName(this, MyDeviceAdminReceiver::class.java)
-                    Toast.makeText(this, getString(R.string.toast_rebooting), Toast.LENGTH_SHORT).show()
-                    try {
-                        dpm.reboot(adminComponent)
-                    } catch (e: Exception) {
-                        Toast.makeText(this, getString(R.string.toast_failed_reboot), Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    Toast.makeText(this, getString(R.string.toast_no_permission), Toast.LENGTH_LONG).show()
-                }
-            } else {
+        binding.layoutAdbStatus.setOnClickListener {
+            copyAdbCommand()
+        }
+
+        binding.btnRebootAccessibility.setOnClickListener {
+            val isAccessibilityEnabled = isAccessibilityServiceEnabled()
+            if (isAccessibilityEnabled) {
                 val service = RebootAccessibilityService.instance
                 if (service != null) {
                     Toast.makeText(this, getString(R.string.toast_rebooting), Toast.LENGTH_SHORT).show()
                     service.triggerPowerMenu()
                 } else {
                     Toast.makeText(this, getString(R.string.toast_no_accessibility), Toast.LENGTH_LONG).show()
-                    openAccessibilitySettings()
                 }
+            } else {
+                openAccessibilitySettings()
+            }
+        }
+
+        binding.btnRebootDpm.setOnClickListener {
+            val isOwner = isDeviceOwner()
+            if (isOwner) {
+                val dpm = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+                val adminComponent = ComponentName(this, MyDeviceAdminReceiver::class.java)
+                Toast.makeText(this, getString(R.string.toast_rebooting), Toast.LENGTH_SHORT).show()
+                try {
+                    dpm.reboot(adminComponent)
+                } catch (e: Exception) {
+                    Toast.makeText(this, getString(R.string.toast_failed_reboot), Toast.LENGTH_LONG).show()
+                }
+            } else {
+                copyAdbCommand()
             }
         }
     }
 
+    private fun copyAdbCommand() {
+        val adbCommand = "adb shell dpm set-device-owner com.sbs.restartapp/.MyDeviceAdminReceiver"
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+        val clip = android.content.ClipData.newPlainText("ADB_Command", adbCommand)
+        clipboard.setPrimaryClip(clip)
+        Toast.makeText(this, "PC에 연결하여 ADB 권한을 획득해야 합니다. 명령어가 클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
+    }
+
     private fun updateDayButtonStyle(button: com.google.android.material.button.MaterialButton, isChecked: Boolean) {
-        val mode = prefs.getString("selected_mode", "accessibility") ?: "accessibility"
         if (isChecked) {
-            if (mode == "adb") {
-                button.setBackgroundColor(getColor(R.color.secondary))
-                button.setTextColor(getColor(R.color.bg_dark))
-                button.strokeColor = ColorStateList.valueOf(getColor(R.color.secondary))
-            } else {
-                button.setBackgroundColor(getColor(R.color.primary))
-                button.setTextColor(getColor(R.color.white))
-                button.strokeColor = ColorStateList.valueOf(getColor(R.color.primary))
-            }
+            button.setBackgroundColor(getColor(R.color.light_green))
+            button.setTextColor(getColor(R.color.black))
+            button.strokeColor = ColorStateList.valueOf(getColor(R.color.light_green))
         } else {
             button.setBackgroundColor(Color.TRANSPARENT)
             button.setTextColor(getColor(R.color.text_sub))

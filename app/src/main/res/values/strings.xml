@@ -7,7 +7,7 @@
     <string name="mode_accessibility">접근성 방식</string>
     <string name="mode_adb">ADB 방식</string>
     
-    <string name="status_title">권한 상태 확인</string>
+    <string name="status_title">권한 상태 및 실행</string>
     <string name="accessibility_status_label">접근성 방식 권한:</string>
     <string name="accessibility_granted">활성화됨 (수행 가능)</string>
     <string name="accessibility_denied">비활성화됨 (설정 필요)</string>
@@ -17,9 +17,10 @@
     <string name="dpm_active">활성화됨 (수행 가능)</string>
     <string name="dpm_inactive">비활성화됨 (설정 필요)</string>
     
-    <string name="action_title">재시작 실행</string>
     <string name="btn_reboot_accessibility">접근성</string>
+    <string name="btn_reboot_accessibility_need">접근성 권한 필요</string>
     <string name="btn_reboot_dpm">ADB</string>
+    <string name="btn_reboot_dpm_need">ADB 권한 필요</string>
     
     <string name="schedule_title">재시작 예약</string>
     <string name="schedule_switch_label">재시작 예약 활성화</string>

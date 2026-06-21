@@ -13,4 +13,5 @@
     <color name="text_main">#FFFFFF</color>
     <color name="text_sub">#A0A5C0</color>
     <color name="divider">#2C2F48</color>
+    <color name="light_green">#ADFF2F</color> <!-- Light Green for Selected Days -->
 </resources>
