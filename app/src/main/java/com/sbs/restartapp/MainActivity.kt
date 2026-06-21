@@ -306,11 +306,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun startAutoRebootCountdown() {
         val mode = prefs.getString("selected_mode", "accessibility") ?: "accessibility"
-        val modeText = if (mode == "adb") "ADB 방식" else "접근성 방식"
+
+        val dialogView = layoutInflater.inflate(R.layout.dialog_countdown, null)
+        val tvNumber = dialogView.findViewById<android.widget.TextView>(R.id.tvCountdownNumber)
+        tvNumber.text = "5"
+        tvNumber.setTextColor(getColor(if (mode == "adb") R.color.secondary else R.color.primary))
 
         val builder = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-        builder.setTitle("자동 재시작 실행")
-        builder.setMessage("5초 후 다시 시작(${modeText})을 실행합니다...")
+        builder.setView(dialogView)
         builder.setCancelable(false)
         builder.setNegativeButton("취소") { dialog, _ ->
             countDownTimer?.cancel()
@@ -324,7 +327,7 @@ class MainActivity : AppCompatActivity() {
         countDownTimer = object : android.os.CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsRemaining = (millisUntilFinished / 1000) + 1
-                dialog.setMessage("${secondsRemaining}초 후 다시 시작(${modeText})을 실행합니다...")
+                tvNumber.text = secondsRemaining.toString()
             }
 
             override fun onFinish() {
