@@ -12,5 +12,5 @@
         android:text="5"
         android:textSize="120sp"
         android:textStyle="bold"
-        android:textColor="@color/secondary" />
+        android:textColor="@color/white" />
 </FrameLayout>

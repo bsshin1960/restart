@@ -310,7 +310,7 @@ class MainActivity : AppCompatActivity() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_countdown, null)
         val tvNumber = dialogView.findViewById<android.widget.TextView>(R.id.tvCountdownNumber)
         tvNumber.text = "5"
-        tvNumber.setTextColor(getColor(if (mode == "adb") R.color.secondary else R.color.primary))
+        tvNumber.setTextColor(getColor(R.color.white))
 
         val builder = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
         builder.setView(dialogView)
@@ -323,6 +323,12 @@ class MainActivity : AppCompatActivity() {
 
         val dialog = builder.create()
         dialog.show()
+
+        // Remove gray card box background
+        dialog.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(Color.TRANSPARENT))
+
+        // Set cancel button text color to white
+        dialog.getButton(android.content.DialogInterface.BUTTON_NEGATIVE)?.setTextColor(getColor(R.color.white))
 
         countDownTimer = object : android.os.CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
