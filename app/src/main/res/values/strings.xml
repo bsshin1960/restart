@@ -35,4 +35,5 @@
     <string name="toast_schedule_set">매주 %1$s %2$d:%3$02d에 재시작이 예약되었습니다.</string>
     <string name="toast_schedule_cancelled">예약 재시작이 해제되었습니다.</string>
     <string name="toast_failed_reboot">재시작 실행에 실패했습니다. 권한을 확인하세요.</string>
+    <string name="copyright">Copyright @ 2026 Shinbosung All rights reserved.</string>
 </resources>
